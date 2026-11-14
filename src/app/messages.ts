@@ -2,7 +2,6 @@ import type { Player } from '../game/types';
 
 export const messages = {
   en: {
-    local: "Local two-player",
     restart: "Restart",
     classic: "Classic",
     checkmate: "Checkmate",
@@ -32,7 +31,6 @@ export const messages = {
     square: (board: number, cell: number, mark: string) => `Board ${board}, square ${cell}, ${mark}`,
   },
   he: {
-    local: "משחק מקומי לשני שחקנים",
     restart: "התחלה מחדש",
     classic: "קלאסי",
     checkmate: "מט",
