@@ -10,8 +10,8 @@ interface HomePageProps {
 export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
   return (
     <main className="game home">
-      <div className="language-picker">
-        <select className="secondary" dir="ltr" value={language}
+      <div className="language-picker" dir="ltr">
+        <select className="secondary" value={language}
           aria-label={language === 'he' ? 'שפה' : 'Language'}
           onChange={(event) => onLanguageChange(event.currentTarget.value === 'he' ? 'he' : 'en')}>
           <option value="en" lang="en" aria-label="English">EN</option>
