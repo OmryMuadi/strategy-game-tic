@@ -2,6 +2,9 @@ import type { Player } from '../game/types';
 
 export const messages = {
   en: {
+    intro: "A two-player strategy game on nine linked boards.",
+    classicDescription: "Win any small board with three in a row.",
+    checkmateDescription: "Moves that give away an immediate win are blocked.",
     restart: "Restart",
     classic: "Classic",
     checkmate: "Checkmate",
@@ -31,6 +34,9 @@ export const messages = {
     square: (board: number, cell: number, mark: string) => `Board ${board}, square ${cell}, ${mark}`,
   },
   he: {
+    intro: "משחק אסטרטגיה לשני שחקנים על תשעה לוחות מקושרים.",
+    classicDescription: "שלושה סימנים בקו בלוח קטן מזכים בניצחון.",
+    checkmateDescription: "מהלך שמאפשר ליריב לנצח מיד חסום.",
     restart: "התחלה מחדש",
     classic: "קלאסי",
     checkmate: "מט",

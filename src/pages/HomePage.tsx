@@ -8,9 +8,11 @@ interface HomePageProps {
 }
 
 export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
+  const textDirection = language === 'he' ? 'rtl' : 'ltr';
+
   return (
-    <main className="game home">
-      <div className="language-picker" dir="ltr">
+    <main className="game home" dir="ltr">
+      <div className="language-picker">
         <select className="secondary" value={language}
           aria-label={language === 'he' ? 'שפה' : 'Language'}
           onChange={(event) => onLanguageChange(event.currentTarget.value === 'he' ? 'he' : 'en')}>
@@ -18,11 +20,29 @@ export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
           <option value="he" lang="he" aria-label="עברית">HE</option>
         </select>
       </div>
-      <header><h1>Vertoxa</h1></header>
+      <header className="home-hero">
+        <div><h1>Vertoxa</h1><p className="home-intro" dir={textDirection}>{copy.intro}</p></div>
+        <div className="hero-board" dir="ltr" aria-hidden="true">
+          {['X', '', 'O', '', 'X', '', 'O', '', 'X'].map((mark, index) => (
+            <span key={index} data-mark={mark}>{mark === 'X' ? '×' : mark === 'O' ? '○' : ''}</span>
+          ))}
+        </div>
+      </header>
       <nav className="home-actions" aria-label={copy.mode}>
-        <Link className="primary" to="/classic">{copy.classic}</Link>
-        <Link className="primary" to="/checkmate">{copy.checkmate}</Link>
-        <Link className="secondary" to="/instructions">{copy.instructions}</Link>
+        {(['classic', 'checkmate'] as const).map((mode) => (
+          <Link key={mode} className={`secondary mode-card mode-card-${mode}`} to={`/${mode}`}
+            aria-labelledby={`label-${mode}`} aria-describedby={`description-${mode}`}>
+            <span className="mode-card-icon" data-mark={mode === 'classic' ? 'X' : 'O'} aria-hidden="true">
+              {mode === 'classic' ? '×' : '○'}
+            </span>
+            <span className="mode-card-text" dir={textDirection}>
+              <span id={`label-${mode}`}>{copy[mode]}</span>
+              <small id={`description-${mode}`}>{mode === 'classic' ? copy.classicDescription : copy.checkmateDescription}</small>
+            </span>
+            <span className="mode-card-arrow" aria-hidden="true">→</span>
+          </Link>
+        ))}
+        <Link className="secondary instructions-link" to="/instructions"><span dir={textDirection}>{copy.instructions}</span></Link>
       </nav>
     </main>
   );

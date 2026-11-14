@@ -41,7 +41,7 @@ export function GamePage({ copy = messages.en, mode }: { copy?: Messages; mode: 
         }}>{copy.restart}</button>
       </header>
 
-      <div className="match-status" role="status">
+      <div className="match-status" role="status" data-player={result.kind === 'playing' ? turn : result.kind === 'draw' ? undefined : result.player}>
         <div>
           <h2>{title}</h2>
           <p>{detail}</p>

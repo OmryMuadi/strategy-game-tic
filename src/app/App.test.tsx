@@ -42,6 +42,8 @@ it('remembers Hebrew and applies it to the game and instructions', async () => {
   expect(screen.getByRole<HTMLSelectElement>('combobox', { name: 'שפה' }).value).toBe('he');
   expect(document.documentElement.lang).toBe('he');
   expect(document.documentElement.dir).toBe('rtl');
+  expect(screen.getByRole('main').getAttribute('dir')).toBe('ltr');
+  expect(screen.getByText('משחק אסטרטגיה לשני שחקנים על תשעה לוחות מקושרים.').getAttribute('dir')).toBe('rtl');
 
   await user.click(screen.getByRole('link', { name: 'קלאסי' }));
   expect(screen.getByRole('status').textContent).toContain('תור השחקן X');

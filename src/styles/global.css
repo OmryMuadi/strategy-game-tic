@@ -57,3 +57,104 @@ h2 { font-size: 1rem; }
 .home-button { margin-block-end: .65rem; font-size: .875rem; }
 .instructions section { padding: 1rem; margin-block-start: 1rem; border: 1px solid #364552; border-radius: .75rem; background: #19232c; }
 .instructions p { margin-block-start: .5rem; color: var(--muted); line-height: 1.6; }
+
+/* Shared palette and surfaces */
+:root {
+  color: #f5f3ff;
+  background: #100d1b;
+  --muted: #b9b1c9;
+  --x: #d9fb83;
+  --o: #f5a5db;
+  --surface: #20192f;
+  --edge: #443956;
+}
+body {
+  min-height: 100svh;
+  background: radial-gradient(ellipse at 50% 0%, #30234b, transparent 42rem), #100d1b;
+}
+h1, h2 { letter-spacing: normal; }
+:root:lang(en) h1 { letter-spacing: -.055em; }
+.secondary { background: var(--surface); border-color: var(--edge); }
+.secondary:hover { background: #302641; border-color: #8572a0; }
+.primary { color: #202813; }
+.primary:hover { background: #e9ffba; }
+
+.home { width: min(100%, 58rem); padding: clamp(1rem, 4vw, 2rem); }
+.home .language-picker { margin-block-end: 1rem; }
+.home .home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+  align-items: center;
+  gap: clamp(1.4rem, 5vw, 4rem);
+  padding: clamp(1.2rem, 5vw, 3.25rem);
+  text-align: left;
+  border: 1px solid #4e3f65;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #302343, #191426 78%);
+  box-shadow: 0 22px 65px #08060e80;
+}
+.home h1 { font-size: clamp(2.8rem, 9vw, 5.4rem); line-height: .98; }
+.home-intro { margin-block-start: 1rem; max-width: 28ch; color: var(--muted); line-height: 1.55; }
+.hero-board {
+  width: min(100%, 17rem);
+  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 1vw, 9px);
+  padding: clamp(.45rem, 1.5vw, .95rem);
+  border: 1px solid #67527c;
+  border-radius: 1.15rem;
+  background: #150f21;
+  box-shadow: 0 10px 28px #090611ad;
+}
+.hero-board span {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid #4b395f;
+  border-radius: .55rem;
+  background: #261d35;
+  font-size: clamp(1.4rem, 6vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1;
+}
+.hero-board span[data-mark="X"] { background: #303839; border-color: #788d53; }
+.hero-board span[data-mark="O"] { background: #35263e; border-color: #795676; }
+.home-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; margin-block-start: 1rem; }
+.home-actions .mode-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  place-items: center start;
+  gap: .75rem;
+  padding: 1rem;
+  min-height: 94px;
+}
+.mode-card-checkmate { border-color: #76547e; }
+.mode-card-text { display: grid; gap: .25rem; text-align: left; }
+.mode-card-text small { color: var(--muted); font-size: .83rem; font-weight: 400; line-height: 1.4; }
+.mode-card-icon { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: .5rem; background: #120e1d; font-size: 1.6rem; }
+.mode-card-arrow { color: var(--muted); }
+.home-actions .instructions-link { grid-column: 1 / -1; justify-self: center; padding-inline: 1.25rem; }
+@media (max-width: 560px) {
+  .home .home-hero { grid-template-columns: 1fr; text-align: center; }
+  .home-intro { margin-inline: auto; }
+  .hero-board { width: min(55%, 10rem); }
+  .home-actions { grid-template-columns: 1fr; }
+}
+
+/* Match and instructions */
+.match-status, .instructions section { background: var(--surface); border-color: var(--edge); }
+.match-status { border-inline-start: 3px solid var(--edge); }
+.match-status[data-player="X"] { border-inline-start-color: var(--x); }
+.match-status[data-player="O"] { border-inline-start-color: var(--o); }
+.turn-mark { background: #342747; }
+.board { gap: clamp(4px, 1.25vw, 9px); }
+.small-board { border-color: #3c314e; background: #171222; }
+.small-board[data-state="available"] { border-color: #8b77bd; background: #3c2e57; }
+.small-board[data-state="won"] { border-color: var(--x); background: #383a30; }
+.small-board[data-state="drawn"] { border-color: #615574; background: #241e31; }
+.cell { background: #221a31; }
+.cell:enabled { background: #493966; }
+@media (hover: hover) { .cell:enabled:hover { background: #66528d; border-color: #c9b7f9; } }
+.cell[data-winning="true"] { background: #3b354c; }
+
