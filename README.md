@@ -28,4 +28,4 @@ The pure TypeScript engine lives in `src/game`. The React hook delegates play an
 
 Classic uses the rules above. Checkmate also blocks any non-winning move that would let the opponent win on their very next turn. If every otherwise legal move would give away that win, the opponent wins by checkmate. A position with no move under Classic rules is still a draw.
 
-Switching modes starts a new match. Restart keeps the selected mode.
+Choose Classic, Checkmate, or Instructions on the home page. Each game starts a new match. Restart keeps the selected mode. Use the EN/HE dropdown on the home page to change the language.

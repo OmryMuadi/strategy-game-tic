@@ -1,6 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
-import { Link, Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
+import { HomeButton } from '../components/HomeButton';
 import { GamePage } from '../pages/GamePage';
+import { HomePage } from '../pages/HomePage';
+import { InstructionsPage } from '../pages/InstructionsPage';
 import { readLanguage, saveLanguage } from '../services/languageStorage';
 import { messages, type Language } from './messages';
 
@@ -19,20 +22,13 @@ export function App() {
   }
 
   return (
-    <>
-      <div className="language-picker">
-        <select className="secondary" dir="ltr" value={language}
-          aria-label={language === 'he' ? 'שפה' : 'Language'}
-          onChange={(event) => changeLanguage(event.currentTarget.value === 'he' ? 'he' : 'en')}>
-          <option value="en" lang="en" aria-label="English">EN</option>
-          <option value="he" lang="he" aria-label="עברית">HE</option>
-        </select>
-      </div>
-      <Routes>
-        <Route index element={<GamePage copy={copy} />} />
-        <Route path="*" element={<main className="game"><h1>{copy.unavailable}</h1><Link to="/">{copy.back}</Link></main>} />
-      </Routes>
-    </>
+    <Routes>
+      <Route index element={<HomePage copy={copy} language={language} onLanguageChange={changeLanguage} />} />
+      <Route path="classic" element={<GamePage key="classic" copy={copy} mode="classic" />} />
+      <Route path="checkmate" element={<GamePage key="checkmate" copy={copy} mode="checkmate" />} />
+      <Route path="instructions" element={<InstructionsPage copy={copy} />} />
+      <Route path="*" element={<main className="game"><h1>{copy.unavailable}</h1><HomeButton label={copy.home} /></main>} />
+    </Routes>
   );
 }
 

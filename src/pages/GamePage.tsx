@@ -1,17 +1,16 @@
 import { useLayoutEffect, useRef } from 'react';
+import { HomeButton } from '../components/HomeButton';
 import { messages, type Messages } from '../app/messages';
 import { Board } from '../components/Board';
 import type { GameMode } from '../game/types';
 import { useGame } from '../hooks/useGame';
 
-const modes: readonly GameMode[] = ['classic', 'checkmate'];
-
-export function GamePage({ copy = messages.en }: { copy?: Messages }) {
-  const { state, legalMoves, play, restart, changeMode } = useGame();
+export function GamePage({ copy = messages.en, mode }: { copy?: Messages; mode: GameMode }) {
+  const { state, legalMoves, play, restart } = useGame(mode);
   const boardContainer = useRef<HTMLDivElement>(null);
   const playAgain = useRef<HTMLButtonElement>(null);
   const shouldMoveFocus = useRef(false);
-  const { result, requiredBoard, turn, mode } = state;
+  const { result, requiredBoard, turn } = state;
 
   useLayoutEffect(() => {
     if (!shouldMoveFocus.current) return;
@@ -33,21 +32,14 @@ export function GamePage({ copy = messages.en }: { copy?: Messages }) {
 
   return (
     <main className="game">
+      <HomeButton label={copy.home} />
       <header className="game-header">
-        <div><p className="mode">{copy.local}</p><h1>Vertoxa</h1></div>
+        <div><p className="mode">{copy[mode]}</p><h1>Vertoxa</h1></div>
         <button className="secondary" type="button" onClick={() => {
           shouldMoveFocus.current = true;
           restart();
         }}>{copy.restart}</button>
       </header>
-
-      <div className="mode-picker" role="group" aria-label={copy.mode} aria-describedby="mode-help">
-        {modes.map((option) => (
-          <button key={option} className="secondary" type="button" aria-pressed={mode === option}
-            onClick={() => changeMode(option)}>{copy[option]}</button>
-        ))}
-      </div>
-      <p className="mode-help" id="mode-help">{copy.modeHelp}</p>
 
       <div className="match-status" role="status">
         <div>
@@ -64,14 +56,7 @@ export function GamePage({ copy = messages.en }: { copy?: Messages }) {
         }} />
       </div>
 
-      {result.kind === 'playing' ? (
-        <details className="rules">
-          <summary>{copy.rules}</summary>
-          <p>{copy.openingRule}</p>
-          <p>{copy.classicRule}</p>
-          {mode === 'checkmate' && <p>{copy.checkmateRule}</p>}
-        </details>
-      ) : (
+      {result.kind !== 'playing' && (
         <button ref={playAgain} className="primary" type="button" onClick={() => {
           shouldMoveFocus.current = true;
           restart();

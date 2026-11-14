@@ -42,16 +42,18 @@ h2 { font-size: 1rem; }
 .cell[data-winning="true"] { background: #304b42; border-color: currentColor; }
 .cell span { animation: place 140ms ease-out; }
 @keyframes place { from { opacity: .4; transform: scale(.8); } }
-.rules { margin-top: .7rem; color: var(--muted); }
-.rules summary { padding: .5rem .2rem; min-height: 36px; }
-.rules p { margin: .35rem .2rem; }
 @media (prefers-reduced-motion: reduce) {
   .cell, .cell span { animation: none; transition: none; }
 }
 
-.mode-picker { display: flex; gap: .4rem; }
-.mode-picker .secondary[aria-pressed="true"] { background: #243a37; border-color: #68ad9a; color: var(--x); }
-.mode-help { margin: .35rem 0 .75rem; color: var(--muted); font-size: .75rem; }
 
-.language-picker { display: flex; justify-content: flex-end; gap: .4rem; width: min(100%, 38rem); margin-inline: auto; padding: clamp(.5rem, 3vw, 1.5rem) clamp(.5rem, 3vw, 1.5rem) 0; }
+.language-picker { display: flex; justify-content: flex-end; margin-block-end: 1.5rem; }
 .language-picker select { cursor: pointer; font: inherit; font-size: .875rem; font-weight: 700; }
+
+.home > header { text-align: center; }
+.home h1 { font-size: clamp(2.6rem, 11vw, 4.5rem); }
+.home-actions { display: grid; gap: .65rem; max-width: 20rem; margin: 1.45rem auto 0; }
+.home-actions a { display: grid; place-items: center; margin: 0; text-decoration: none; }
+.home-button { margin-block-end: .65rem; font-size: .875rem; }
+.instructions section { padding: 1rem; margin-block-start: 1rem; border: 1px solid #364552; border-radius: .75rem; background: #19232c; }
+.instructions p { margin-block-start: .5rem; color: var(--muted); line-height: 1.6; }
