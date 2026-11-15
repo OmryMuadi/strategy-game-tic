@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
 import type { Language, Messages } from '../app/messages';
 
@@ -8,6 +9,7 @@ interface HomePageProps {
 }
 
 export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
+  const [solo, setSolo] = useState(false);
   const textDirection = language === 'he' ? 'rtl' : 'ltr';
 
   return (
@@ -31,9 +33,13 @@ export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
           ))}
         </div>
       </header>
+      <div className="opponent-picker" role="group" aria-label={copy.opponent}>
+        <button className="secondary" type="button" aria-pressed={!solo} onClick={() => setSolo(false)}>{copy.localPlayers}</button>
+        <button className="secondary" type="button" aria-pressed={solo} onClick={() => setSolo(true)}>{copy.playBot}</button>
+      </div>
       <nav className="home-actions" aria-label={copy.mode}>
         {(['classic', 'checkmate'] as const).map((mode) => (
-          <Link key={mode} className={`secondary mode-card mode-card-${mode}`} to={`/${mode}`}
+          <Link key={mode} className={`secondary mode-card mode-card-${mode}`} to={`/${mode}${solo ? '/bot' : ''}`}
             aria-labelledby={`label-${mode}`} aria-describedby={`description-${mode}`}>
             <span className="mode-card-icon" data-mark={mode === 'classic' ? 'X' : 'O'} aria-hidden="true">
               {mode === 'classic' ? '×' : '○'}

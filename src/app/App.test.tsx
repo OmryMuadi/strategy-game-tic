@@ -58,3 +58,18 @@ it('remembers Hebrew and applies it to the game and instructions', async () => {
   expect(screen.getByRole('link', { name: 'Classic' })).toBeTruthy();
 });
 
+
+it.each(['Classic', 'Checkmate'])('lets the bot reply in %s and returns control to X', async (mode) => {
+  const user = userEvent.setup();
+  render(<MemoryRouter><App /></MemoryRouter>);
+  await user.click(screen.getByRole('button', { name: 'Play vs bot' }));
+  await user.click(screen.getByRole('link', { name: mode }));
+  await user.click(screen.getByRole('button', { name: 'Board 1, square 2, empty' }));
+
+  expect(screen.getByRole('status').textContent).toContain('Bot is thinking');
+  expect(screen.getByRole<HTMLButtonElement>('button', { name: 'Board 2, square 1, empty' }).disabled).toBe(true);
+  const reply = await screen.findByRole('button', { name: /^Board 2, square \d, O$/ });
+  expect(reply).toBeTruthy();
+  expect(screen.getByRole('status').textContent).toContain('Player X to move');
+});
+

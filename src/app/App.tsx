@@ -26,6 +26,8 @@ export function App() {
       <Route index element={<HomePage copy={copy} language={language} onLanguageChange={changeLanguage} />} />
       <Route path="classic" element={<GamePage key="classic" copy={copy} mode="classic" />} />
       <Route path="checkmate" element={<GamePage key="checkmate" copy={copy} mode="checkmate" />} />
+      <Route path="classic/bot" element={<GamePage key="classic-bot" copy={copy} mode="classic" solo />} />
+      <Route path="checkmate/bot" element={<GamePage key="checkmate-bot" copy={copy} mode="checkmate" solo />} />
       <Route path="instructions" element={<InstructionsPage copy={copy} />} />
       <Route path="*" element={<main className="game"><h1>{copy.unavailable}</h1><HomeButton label={copy.home} /></main>} />
     </Routes>

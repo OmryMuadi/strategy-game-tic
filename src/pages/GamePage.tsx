@@ -5,26 +5,26 @@ import { Board } from '../components/Board';
 import type { GameMode } from '../game/types';
 import { useGame } from '../hooks/useGame';
 
-export function GamePage({ copy = messages.en, mode }: { copy?: Messages; mode: GameMode }) {
-  const { state, legalMoves, play, restart } = useGame(mode);
+export function GamePage({ copy = messages.en, mode, solo = false }: { copy?: Messages; mode: GameMode; solo?: boolean }) {
+  const { state, legalMoves, play, restart, botTurn } = useGame(mode, solo);
   const boardContainer = useRef<HTMLDivElement>(null);
   const playAgain = useRef<HTMLButtonElement>(null);
   const shouldMoveFocus = useRef(false);
   const { result, requiredBoard, turn } = state;
 
   useLayoutEffect(() => {
-    if (!shouldMoveFocus.current) return;
+    if (!shouldMoveFocus.current || botTurn) return;
     shouldMoveFocus.current = false;
     if (result.kind === 'playing') {
       boardContainer.current?.querySelector<HTMLButtonElement>('.cell:enabled')?.focus();
     } else {
       playAgain.current?.focus();
     }
-  }, [state, result.kind]);
+  }, [state, result.kind, botTurn]);
 
   const title = result.kind === 'win' ? copy.win(result.player)
     : result.kind === 'checkmate' ? copy.mate(result.player)
-    : result.kind === 'draw' ? copy.draw : copy.turn(turn);
+    : result.kind === 'draw' ? copy.draw : botTurn ? copy.botThinking : copy.turn(turn);
   const detail = result.kind === 'win' ? copy.winDetail(result.board + 1)
     : result.kind === 'checkmate' ? copy.mateDetail
     : result.kind === 'draw' ? copy.drawDetail
@@ -34,7 +34,7 @@ export function GamePage({ copy = messages.en, mode }: { copy?: Messages; mode: 
     <main className="game">
       <HomeButton label={copy.home} />
       <header className="game-header">
-        <div><p className="mode">{copy[mode]}</p></div>
+        <div><p className="mode">{copy[mode]}</p>{solo && <p>{copy.playBot}</p>}</div>
         <button className="secondary" type="button" onClick={() => {
           shouldMoveFocus.current = true;
           restart();
