@@ -13,12 +13,15 @@ export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
   return (
     <main className="game home" dir="ltr">
       <div className="language-picker">
-        <select className="secondary" value={language}
-          aria-label={language === 'he' ? 'שפה' : 'Language'}
-          onChange={(event) => onLanguageChange(event.currentTarget.value === 'he' ? 'he' : 'en')}>
-          <option value="en" lang="en" aria-label="English">EN</option>
-          <option value="he" lang="he" aria-label="עברית">HE</option>
-        </select>
+        <div className="language-control">
+          <span className="language-globe" aria-hidden="true" />
+          <select value={language}
+            aria-label={language === 'he' ? 'שפה' : 'Language'}
+            onChange={(event) => onLanguageChange(event.currentTarget.value === 'he' ? 'he' : 'en')}>
+            <option value="en" lang="en" aria-label="English">EN</option>
+            <option value="he" lang="he" aria-label="עברית">HE</option>
+          </select>
+        </div>
       </div>
       <header className="home-hero">
         <div className="home-hero-copy"><h1 lang="en">Grid Duel</h1><p className="home-intro" dir={textDirection}>{copy.intro}</p></div>
