@@ -222,3 +222,52 @@ h1, h2 { letter-spacing: normal; }
 
 .opponent-picker { display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem; margin-block-start: 1rem; }
 .opponent-picker button[aria-pressed="true"] { border-color: var(--x); color: var(--x); }
+
+.opponent-picker button, .match-opponent {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+}
+.match-opponent { color: var(--muted); font-size: .875rem; }
+.opponent-icon { position: relative; flex: none; width: 1.25rem; height: 1.1rem; }
+.opponent-icon::before, .opponent-icon::after { content: ""; position: absolute; }
+.opponent-icon[data-kind="players"]::before {
+  top: 1px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 9px 0 currentColor;
+}
+.opponent-icon[data-kind="players"]::after {
+  bottom: 1px;
+  left: 0;
+  width: 9px;
+  height: 7px;
+  border-radius: 5px 5px 2px 2px;
+  background: currentColor;
+  box-shadow: 10px 0 currentColor;
+}
+.opponent-icon[data-kind="bot"] {
+  height: .82rem;
+  margin-top: .2rem;
+  border: 1.5px solid currentColor;
+  border-radius: .3rem;
+}
+.opponent-icon[data-kind="bot"]::before {
+  bottom: 100%;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 4px;
+  background: currentColor;
+}
+.opponent-icon[data-kind="bot"]::after {
+  top: 3px;
+  left: 4px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 6px 0 currentColor;
+}

@@ -1,3 +1,4 @@
+import { OpponentIcon } from '../components/OpponentIcon';
 import { useLayoutEffect, useRef } from 'react';
 import { HomeButton } from '../components/HomeButton';
 import { messages, type Messages } from '../app/messages';
@@ -34,7 +35,7 @@ export function GamePage({ copy = messages.en, mode, solo = false }: { copy?: Me
     <main className="game">
       <HomeButton label={copy.home} />
       <header className="game-header">
-        <div><p className="mode">{copy[mode]}</p>{solo && <p>{copy.playBot}</p>}</div>
+        <div><p className="mode">{copy[mode]}</p><p className="match-opponent"><OpponentIcon solo={solo} />{solo ? copy.playBot : copy.localPlayers}</p></div>
         <button className="secondary" type="button" onClick={() => {
           shouldMoveFocus.current = true;
           restart();

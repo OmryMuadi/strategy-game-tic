@@ -1,3 +1,4 @@
+import { OpponentIcon } from '../components/OpponentIcon';
 import { useState } from 'react';
 import { Link } from 'react-router';
 import type { Language, Messages } from '../app/messages';
@@ -34,8 +35,8 @@ export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
         </div>
       </header>
       <div className="opponent-picker" role="group" aria-label={copy.opponent}>
-        <button className="secondary" type="button" aria-pressed={!solo} onClick={() => setSolo(false)}>{copy.localPlayers}</button>
-        <button className="secondary" type="button" aria-pressed={solo} onClick={() => setSolo(true)}>{copy.playBot}</button>
+        <button className="secondary" type="button" aria-pressed={!solo} onClick={() => setSolo(false)}><OpponentIcon solo={false} />{copy.localPlayers}</button>
+        <button className="secondary" type="button" aria-pressed={solo} onClick={() => setSolo(true)}><OpponentIcon solo />{copy.playBot}</button>
       </div>
       <nav className="home-actions" aria-label={copy.mode}>
         {(['classic', 'checkmate'] as const).map((mode) => (

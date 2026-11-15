@@ -62,7 +62,7 @@ it('remembers Hebrew and applies it to the game and instructions', async () => {
 it.each(['Classic', 'Checkmate'])('lets the bot reply in %s and returns control to X', async (mode) => {
   const user = userEvent.setup();
   render(<MemoryRouter><App /></MemoryRouter>);
-  await user.click(screen.getByRole('button', { name: 'Play vs bot' }));
+  await user.click(screen.getByRole('button', { name: 'Player vs Bot' }));
   await user.click(screen.getByRole('link', { name: mode }));
   await user.click(screen.getByRole('button', { name: 'Board 1, square 2, empty' }));
 
