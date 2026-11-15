@@ -1,10 +1,11 @@
 import type { Language } from '../app/messages';
 
-const key = 'vertoxa.language';
+const key = 'Grid Duel.language';
 
 export function readLanguage(): Language {
   try {
-    return localStorage.getItem(key) === 'he' ? 'he' : 'en';
+    const savedLanguage = localStorage.getItem(key) ?? localStorage.getItem('vertoxa.language');
+    return savedLanguage === 'he' ? 'he' : 'en';
   } catch {
     return 'en';
   }

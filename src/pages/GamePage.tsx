@@ -34,7 +34,7 @@ export function GamePage({ copy = messages.en, mode }: { copy?: Messages; mode: 
     <main className="game">
       <HomeButton label={copy.home} />
       <header className="game-header">
-        <div><p className="mode">{copy[mode]}</p><h1>Vertoxa</h1></div>
+        <div><p className="mode">{copy[mode]}</p></div>
         <button className="secondary" type="button" onClick={() => {
           shouldMoveFocus.current = true;
           restart();

@@ -1,4 +1,4 @@
-# Strategy Tic
+# Grid Duel
 
 A local two-player strategy game played on nine small tic-tac-toe boards.
 

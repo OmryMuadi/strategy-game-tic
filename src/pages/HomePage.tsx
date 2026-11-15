@@ -21,7 +21,7 @@ export function HomePage({ copy, language, onLanguageChange }: HomePageProps) {
         </select>
       </div>
       <header className="home-hero">
-        <div><h1>Vertoxa</h1><p className="home-intro" dir={textDirection}>{copy.intro}</p></div>
+        <div className="home-hero-copy"><h1 lang="en">Grid Duel</h1><p className="home-intro" dir={textDirection}>{copy.intro}</p></div>
         <div className="hero-board" dir="ltr" aria-hidden="true">
           {['X', '', 'O', '', 'X', '', 'O', '', 'X'].map((mark, index) => (
             <span key={index} data-mark={mark}>{mark === 'X' ? '×' : mark === 'O' ? '○' : ''}</span>
